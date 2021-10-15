@@ -1,5 +1,5 @@
 FROM golang:alpine AS build
-WORKDIR /app
+WORKDIR /app-build
 ADD go.mod go.sum ./
 RUN go mod download
 ADD . .
@@ -9,6 +9,6 @@ RUN go test -v ./internal/app
 RUN go build -a -installsuffix cgo -o app ./cmd/app
 
 FROM scratch
-COPY --from=build /app /app
+COPY --from=build /app-build/app /app
 
 ENTRYPOINT ["/app"]
