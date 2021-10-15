@@ -7,7 +7,7 @@ A simple build plugin that saves a file or folder in the release archive for lat
 ```yaml
 version: 2
 builds:
-  lambda:
+  files:
     image: mergermarket/cdflow2-build-files
     params:
       path: file/or/folder/to/save
