@@ -4,6 +4,16 @@ A simple build plugin that saves a file or folder in the release archive for lat
 
 ## Example
 
+This is a full example of saving a folder during the build/release and the using
+Terraform to upload it to S3 during the deploy.
+
+### cdflow.yaml
+
+Add a key to the `builds` map in cdflow.yaml (e.g. `files`). Along with the image
+(i.e. `mergermarket/cdflow2-build-files), this takes a single required parameter
+containing the file or folder to save (relative to the root folder where the
+`cdflow.yaml` is stored):
+
 ```yaml
 version: 2
 builds:
@@ -17,19 +27,7 @@ terraform:
   image: hashicorp/terraform
 ```
 
-## Interface
-
-### cdflow.yaml
-
-Add a key to the `builds` map in cdflow.yaml (e.g. `files`). Along with the image
-(i.e. `mergermarket/cdflow2-build-files), this takes a single required parameter
-containing the file or folder to save (relative to the root folder where the
-`cdflow.yaml` is stored):
-
-Params
-    path: (Required) file/folder to save in the release
-
-### Terraform variable
+### infra/main.tf
 
 With cdflow2 adding a build results in a Terraform variable with the same name -
 i.e. if you call the build `files` then a `files` variable will be set. This includes
@@ -59,4 +57,3 @@ locals {
   }
 }
 ```
-
