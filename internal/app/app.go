@@ -15,5 +15,5 @@ func SaveData(targetBasePath, sourcePath string) (string, error) {
 	}
 	name := filepath.Base(sourcePath)
 	copy.Copy(sourcePath, path.Join(targetDirectory, name))
-	return path.Join(path.Base(targetDirectory), name), nil
+	return path.Join(targetDirectory, name), nil
 }

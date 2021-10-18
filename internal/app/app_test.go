@@ -21,17 +21,17 @@ func TestSaveFile(t *testing.T) {
 	testFile := path.Join(path.Dir(filename), "test", "test.txt")
 
 	// When
-	actualPath, err := app.SaveData(targetDirectory, testFile)
+	savedPath, err := app.SaveData(targetDirectory, testFile)
 	if err != nil {
 		t.Fatal(err)
 	}
 
 	// Then
-	actualFilename := path.Base(actualPath)
-	if actualFilename != "test.txt" {
-		t.Fatalf("got '%v' filename, expected '%v'", actualFilename, "test.txt")
+	savedFilename := path.Base(savedPath)
+	if savedFilename != "test.txt" {
+		t.Fatalf("got '%v' filename, expected '%v'", savedFilename, "test.txt")
 	}
-	rawContents, err := ioutil.ReadFile(path.Join(targetDirectory, actualPath))
+	rawContents, err := ioutil.ReadFile(savedPath)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -52,17 +52,17 @@ func TestSaveDir(t *testing.T) {
 	testDir := path.Join(path.Dir(filename), "test")
 
 	// When
-	actualPath, err := app.SaveData(targetDirectory, testDir)
+	savedPath, err := app.SaveData(targetDirectory, testDir)
 	if err != nil {
 		t.Fatal(err)
 	}
 
 	// Then
-	actualDirname := path.Base(actualPath)
-	if actualDirname != "test" {
-		t.Fatalf("got '%v' dirname, expected '%v'", actualDirname, "test")
+	savedDirname := path.Base(savedPath)
+	if savedDirname != "test" {
+		t.Fatalf("got '%v' dirname, expected '%v'", savedDirname, "test")
 	}
-	rawContents, err := ioutil.ReadFile(path.Join(targetDirectory, actualPath, "test.txt"))
+	rawContents, err := ioutil.ReadFile(path.Join(savedPath, "test.txt"))
 	if err != nil {
 		t.Fatal(err)
 	}
